@@ -3,6 +3,8 @@ const bodyParser = require('body-parser');
 const bcrypt = require('bcrypt');
 const cors = require('cors');
 
+// env variable to retrieve clarifai api key
+const env = require('dotenv').config().parsed;
 
 // Create express app
 const app = express();
@@ -37,6 +39,10 @@ const db = {
 
 app.get('/', (req, res) => {
     res.json(db.users)
+})
+
+app.get('/clarifaiApiKey', (req, res) => {
+    res.json(env.ClarifaiApiKey);
 })
 
 app.post('/signin', (req, res) => {
