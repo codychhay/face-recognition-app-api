@@ -3,6 +3,7 @@ const bodyParser = require('body-parser');
 const bcrypt = require('bcrypt');
 const cors = require('cors');
 const knex = require('knex');
+const env = require('dotenv').config().parsed;
 
 //controllers
 const signin = require('./controllers/Signin');
@@ -20,9 +21,6 @@ const database = knex({
         database : 'face-recognition-app'
     }
 });
-
-// env variable to retrieve clarifai api key
-const env = require('dotenv').config().parsed;
 
 // Create express app
 const app = express();
@@ -57,8 +55,6 @@ const db = {
 
 app.get('/', (req, res) => { res.json(db.users) })
 
-app.get('/clarifaiApiKey', (req, res) => { res.json(env.ClarifaiApiKey) })
-
 // handleSignin is function that returns a function, hence doesn't need to inject req and res as dependency-- method 1 (matter of preference)
 app.post('/signin', signin.handleSignin(database, bcrypt))
 
@@ -69,7 +65,9 @@ app.get('/profile/:id', (req, res) => { profileGet.handleProfileGet(req, res, da
 
 app.put('/image', (req, res) => { image.handleImage(req, res, database) })
 
-app.listen(3000, () => {
-    console.log('server is running on port 3000');
+app.post('/apiCall', (req, res) => {image.handleClarifaiApiCall(req, res)})
+
+app.listen(env.PORT, () => {
+    console.log(`server is running on port ${env.PORT}`);
 })
 

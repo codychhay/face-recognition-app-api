@@ -1,5 +1,11 @@
 const handleRegister = (req, res, database, bcrypt) => {
     const {name, email, password} = req.body;
+
+    // Input validation-- never trust input from front-end
+    if (!name || !email || !password) {
+        return res.status(400).json('Incorrect form submission');
+    }
+
     const hash = calculatePasswordHash(password, bcrypt);
     database.transaction(trx => {
         trx('login').insert({
