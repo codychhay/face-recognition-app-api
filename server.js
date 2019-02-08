@@ -67,14 +67,15 @@ app.put('/image', (req, res) => { image.handleImage(req, res, database) })
 
 app.post('/apiCall', (req, res) => {image.handleClarifaiApiCall(req, res)})
 
-app.listen(env.PORT, () => {
-    console.log(`server is running on port ${env.PORT}`);
-})
+// Reading from .env file
+// app.listen(env.PORT, () => {
+//     console.log(`server is running on port ${env.PORT}`);
+// })
 
 // Another way to use environment var without library
-// Note: when start the server, type PORT=3000 node server.js
-//const PORT = process.env.PORT;
-// app.listen(PORT, () => {
-//     console.log(`server is running on port ${PORT}`);
-// })
+//Note: when start the server, type PORT=3000 node server.js
+
+app.listen(process.env.PORT || 3000, () => {
+    console.log(`server is running on port ${process.env.PORT || 3000}`);
+})
 
