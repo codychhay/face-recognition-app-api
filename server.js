@@ -31,29 +31,7 @@ app.use(bodyParser.json());
 // So front-end can make request to our server with trust (cross origin)
 app.use(cors());
 
-// db of users
-const db = {
-    users : [
-        {
-            id: '123',
-            name: 'cody',
-            email: 'cody@gmail.com',
-            password: 'cody',
-            entries: 0,
-            joined: new Date()
-        },
-        {
-            id: '124',
-            name: 'rem',
-            email: 'rem@gmail.com',
-            password: 'rem',
-            entries: 0,
-            joined: new Date()
-        }
-    ]
-};
-
-app.get('/', (req, res) => { res.json(db.users) })
+app.get('/', (req, res) => { res.json("It's working") })
 
 // handleSignin is function that returns a function, hence doesn't need to inject req and res as dependency-- method 1 (matter of preference)
 app.post('/signin', signin.handleSignin(database, bcrypt))
