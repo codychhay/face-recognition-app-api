@@ -13,13 +13,8 @@ const image = require('./controllers/Image');
 
 // Uses knexJS to connect to database
 const database = knex({
-    client: 'pg',
-    connection: {
-        host : '127.0.0.1',
-        user : '',
-        password : '',
-        database : 'face-recognition-app'
-    }
+    connectionString: process.env.DATABASE_URL,
+    ssl: true,
 });
 
 // Create express app
