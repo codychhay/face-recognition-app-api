@@ -3,7 +3,7 @@ const bodyParser = require('body-parser');
 const bcrypt = require('bcrypt');
 const cors = require('cors');
 const knex = require('knex');
-const env = require('dotenv').config().parsed;
+//const env = require('dotenv').config().parsed;
 
 //controllers
 const signin = require('./controllers/Signin');
